@@ -174,8 +174,18 @@ class ChromaMemoryStorage(MemoryStorage):
             # Note: ChromaDB expects __call__ with "input" parameter, not "texts"
             class MinimalEmbeddingFunction:
                 def __call__(self, input):
-                    vectors = [np.random.rand(384) for _ in input]
-                    return normalize_embeddings(np.array(vectors))
+                    # Generate random vectors and manually normalize them
+                    vectors = []
+                    for _ in input:
+                        # Generate random vector of the right dimensionality
+                        vec = np.random.rand(384).astype(np.float32)
+                        # Normalize to unit length (L2 norm)
+                        norm = np.linalg.norm(vec)
+                        if norm > 0:
+                            vec = vec / norm
+                        # Convert to list for ChromaDB
+                        vectors.append(vec.tolist())
+                    return vectors
             
             self.embedding_function = MinimalEmbeddingFunction()
             logger.warning("Minimal dummy embedding function created. Search quality will be poor.")
