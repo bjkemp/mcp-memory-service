@@ -1,0 +1,12 @@
+{
+  "memory": {
+    "command": "python3",
+    "args": [
+      "/Users/kempb/Projects/Claude/src/mcp-memory-service/run_memory.py"
+    ],
+    "env": {
+      "MCP_MEMORY_CHROMA_PATH": "/Users/kempb/Library/Application Support/mcp-memory/chroma_db",
+      "MCP_MEMORY_BACKUPS_PATH": "/Users/kempb/Library/Application Support/mcp-memory/backups"
+    }
+  }
+}
